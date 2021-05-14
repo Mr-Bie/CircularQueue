@@ -19,6 +19,12 @@ public:
     int rear, front;
     int *arr;
 
+    bool isFull(){
+        int rearTmp = rear;
+        rearTmp = (rearTmp + 1) % sizeof(arr);
+        if(rearTmp == front) return true;
+        else return false;
+    }
 
 };
 
