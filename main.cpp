@@ -25,6 +25,10 @@ public:
         if(rearTmp == front) return true;
         else return false;
     }
+    bool isEmpty(){
+        if (rear == front) return true;
+        else return false;
+    }
 
 };
 
