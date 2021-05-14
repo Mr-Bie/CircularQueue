@@ -51,6 +51,12 @@ public:
             return res;
         }
     }
+    int getNum(){
+        if(isEmpty()) return 0;
+        if(isFull()) return sizeof(arr);
+        if(rear > front) return front - rear;
+        if(front > rear) return (sizeof(arr) - front) + rear;
+    }
 };
 
 int main() {
