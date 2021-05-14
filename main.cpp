@@ -39,7 +39,18 @@ public:
             arr[rear] = num;
         }
     }
-
+    int deQueue(){
+        if(isEmpty()){
+            cout<<"Queue is empty!"<<endl;
+            return NULL;
+        }
+        else {
+            front = (front + 1) % sizeof(arr);
+            int res = arr[front];
+            arr[front] = NULL;
+            return res;
+        }
+    }
 };
 
 int main() {
