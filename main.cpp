@@ -29,6 +29,16 @@ public:
         if (rear == front) return true;
         else return false;
     }
+    void enQueue(int num){
+        if (isFull()) {
+            cout<<"Queue is full!"<<endl;
+            return;
+        }
+        else {
+            rear = (rear + 1) % sizeof(arr);
+            arr[rear] = num;
+        }
+    }
 
 };
 
