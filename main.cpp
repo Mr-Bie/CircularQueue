@@ -30,7 +30,6 @@ public:
 
     void enQueue(string job) {
         if (isFull()) {
-            /*cout << "Queue is full!" << endl;*/
             return;
         } else {
             rear = (rear + 1) % arrSize;
@@ -40,7 +39,6 @@ public:
 
     string deQueue() {
         if (isEmpty()) {
-            /*cout << "Queue is empty!" << endl;*/
             return "";
         } else {
             front = (front + 1) % arrSize;
@@ -48,13 +46,6 @@ public:
             arr[front] = "0";
             return res;
         }
-    }
-
-    int getNum() {
-        if (isEmpty()) return 0;
-        if (isFull()) return arrSize - 1;
-        if (rear > front) return rear - front;
-        if (front > rear) return (arrSize - front) + rear;
     }
 };
 
