@@ -8,20 +8,23 @@ public:
         arr = new int[size];
         front = 0;
         rear = 0;
+        arrSize = size;
     }
 
     CircularQueue() {
         arr = new int[100];
         front = 0;
         rear = 0;
+        arrSize = 100;
     }
 
     int rear, front;
     int *arr;
+    int arrSize;
 
     bool isFull(){
         int rearTmp = rear;
-        rearTmp = (rearTmp + 1) % sizeof(arr);
+        rearTmp = (rearTmp + 1) % arrSize;
         if(rearTmp == front) return true;
         else return false;
     }
@@ -35,31 +38,46 @@ public:
             return;
         }
         else {
-            rear = (rear + 1) % sizeof(arr);
+            rear = (rear + 1) % arrSize;
             arr[rear] = num;
         }
     }
-    int deQueue(){
+    string deQueue(){
         if(isEmpty()){
             cout<<"Queue is empty!"<<endl;
-            return NULL;
+            return "No item to deQueue";
         }
         else {
-            front = (front + 1) % sizeof(arr);
+            front = (front + 1) % arrSize;
             int res = arr[front];
-            arr[front] = NULL;
-            return res;
+            arr[front] = 0;
+            return to_string(res);
         }
     }
     int getNum(){
         if(isEmpty()) return 0;
-        if(isFull()) return sizeof(arr);
-        if(rear > front) return front - rear;
-        if(front > rear) return (sizeof(arr) - front) + rear;
+        if(isFull()) return arrSize - 1;
+        if(rear > front) return rear - front;
+        if(front > rear) return (arrSize - front) + rear;
     }
 };
 
 int main() {
     std::cout << "Hello, World!" << std::endl;
+    CircularQueue queue(5);
+    for (int i = 0; i < 5; i++) {
+        queue.enQueue(i);
+        cout<<"Queue arr index "<< i <<" : "<< queue.arr[i] <<endl;
+        cout<<"queue have : "<< queue.getNum()<<" numbers now"<<endl;
+    }
+    cout<<"arr "<<"4"<<" : "<<queue.arr[4]<<endl;
+    cout<<queue.deQueue()<<endl;
+    cout<<queue.deQueue()<<endl;
+    cout<<queue.deQueue()<<endl;
+    cout<<"queue have : "<< queue.getNum()<<" numbers now"<<endl;
+    cout<<queue.deQueue()<<endl;
+    cout<<queue.deQueue()<<endl;
+    cout<<"queue have : "<< queue.getNum()<<" numbers now"<<endl;
+    cout<<queue.deQueue()<<endl;
     return 0;
 }
