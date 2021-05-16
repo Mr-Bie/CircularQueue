@@ -65,7 +65,14 @@ void rotationalScheduler(string arg) {
     while ((arg.find(",")) != string::npos) {
         string job = arg.substr(0, arg.find(','));
         string jobTitle = job.substr(0, arg.find(' '));
-        int jobAmount = stoi(job.erase(0, arg.find(' ') + 1));
+        int jobAmount;
+        try {
+            jobAmount = stoi(job.erase(0, arg.find(' ') + 1));
+        } catch (...) {
+            cout<<"Invalid job amount for job : "<<jobTitle<<endl;
+            arg.erase(0, arg.find(',') + 1);
+            continue;
+        }
         if (maxAmount < jobAmount) maxAmount = jobAmount;
         CircularQueue queue(jobAmount + 1);
         for (int i = 0; i <= jobAmount; ++i) {
@@ -83,6 +90,6 @@ void rotationalScheduler(string arg) {
 
 int main() {
     std::cout << "Hello, World!" << std::endl;
-    rotationalScheduler("B 1,A 5,C 5,TH 1,W 5,QRC 4,h 2");
+    rotationalScheduler("B 1,A 5,C 5,TH 1,W a,QRC 4,h 2");
     return 0;
 }
